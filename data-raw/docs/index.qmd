@@ -1,0 +1,429 @@
+---
+title: "A Preliminary Review of Peruvian Potable Water System Data"
+author: "Lauren Judah"
+date: "February 13, 2024"
+format:
+  html:
+    embed-resources: true
+    toc: true
+bibliography: bibliography.bib
+link-citations: true
+link-bibliography: true
+execute:
+  warning: false
+editor_options: 
+  chunk_output_type: console
+editor: visual
+---
+
+# Introduction
+
+The objective of this project is to gain a preliminary understanding of community potable water systems in Peru. In April, I will be starting a position as a WASH Facilitator with the Peace Corps in Peru. This project serves a head-start in strategizing where I can effectively apply my skills during my 2 years of work.
+
+During my master's degree, I did research in Madagascar on bacterial regrowth, which is described by @Mellor2013 as a phenomenon where drinking water becomes re-contaminated after collection but before consumption.
+
+The households in my thesis sampling were broken into groups according to their distribution type (piped vs well); storage type (open vs closed storage); and treatment type (chlorinated vs. non-chlorinated). I'm hoping to continue similar research in Peru, and this project serves as a rudimentary analysis of Peruvian data sets from SIASAR to categorize communities for sampling based on conditions of treatment, storage, and distribution systems.
+
+@Trevett2005 described a common situation in which a community served by a piped water system in poor condition may store their water for long periods of time when tap water access is intermittent, thus increasing their risk of bacterial regrowth. Additionally, @LeChevallier1996 noted that communities served by water systems with inadequate chlorine residuals are at high risk of bacterial regrowth. Thus, categorizing communities by distribution and treatment conditions may be beneficial for future work in Peru.
+
+The goals of this project are to:
+
+1.  Combine and clean SIASAR data to generate a working data set that includes only communities which have data for each category (distribution system, storage system, and treatment system).
+2.  Create a stacked bar graph data visualization which summarizes the conditions of community water distribution, storage, and treatment systems.
+3.  Create a map visualization that shows the spatial distribution of communities corresponding to the condition of their water distribution, storage, and treatment systems.
+4.  Create a summary table of community size, water sources, flow rate, distribution systems, and chlorination levels broken down by geographic region.
+5.  Design hypothetical sampling groups based on the visualizations and summary tables created from Goals #1 through #4.
+
+# Methods
+
+Data for this project was obtained from @SIASAR, an information system containing data on rural water supply and sanitation services. Using SIASAR's "download data by country" tool, all available data for Peru (10 excel files) were downloaded. After examining the 10 excel files, only 5 pertained to potable water systems. Those 5 data sets were imported into R and subsequently empty values and unnecessary columns were deleted from them. Finally, the 5 data sets were combined into 1 data frame based on community ID. The combined, cleaned data set contains data from 32 communities.
+
+```{r}
+#importing data
+
+library("readxl")
+
+catchments_uncleaned <- read_xls(here::here("data/raw/system_catchments.PE.xls"))
+
+distribution_uncleaned <- read_xls(here::here("data/raw/system_distribution.PE.xls"))
+
+maintenance_uncleaned <- read_xls(here::here("data/raw/system_main.PE.xls"))
+
+storage_uncleaned <- read_xls(here::here("data/raw/system_storage-PE.xls"))
+
+treatment_uncleaned <- read_xls(here::here("data/raw/system_treatment.PE.xls"))
+```
+
+```{r}
+#data cleaning
+
+library(tidyverse)
+
+#deleting unneeded columns
+
+catchments_df <- subset(catchments_uncleaned, select = -c(fecha_encuesta,fecha_validacion, pais,codigo, otras_divisiones,n_comunidades,n_PSE,financiamientos,monto_financ,monto_rehab,fuente_codigo,fuente_nombre, fuente_principal,	fuente_caudal,	fuente_caudal_ud,	fuente_caudal_fecha,	fuente_caudal_estiaje,	fuente_caudal_estiaje_ud, fuente_caudal_estiaje_fecha, fuente_vegetacion,	fuente_erosion,	fuente_proteccion,	fuente_contaminacion_org,	fuente_contaminacion_inorg,	capt, eiaaut, eiainf, eiazpa, eiastr, eia) )
+
+distribution_df <- subset(distribution_uncleaned, select = -c(fecha_encuesta, fecha_validacion, nombre, pais, latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia,
+dist_codigo, dist_micromed, dist_micromed_opera, dist_distancia, eiaaut, eiainf, eiazpa, eiastr, eia) )
+
+maintenance_df <- subset(maintenance_uncleaned, select = -c(fecha_encuesta, fecha_validacion, nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE, pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia, capt_n, capt_tipo_principal,	capt_caudal_total,	capt_caudal_ud,	capt_estado, cond_n,	cond_estado, trat_n, almc_n, almc_volumen, almc_volumen_ud, almc_limpieza, almc_limpieza_ud, almc_estado, dist_n, dist_micromed_consumo, dist_distancia, dist_estado, cloro_fecha, pasa_coliformes, fecha_coliformes,	pasa_fisicoquimico,	fecha_fisicoquimico, eiaaut,	eiainf,	eiazpa,	eiastr,	eia,	siasar_version) )
+
+storage_df <- subset(storage_uncleaned, select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia,almc_codigo,	almc_volumen,	almc_volumen_ud,	almc_limpieza, eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
+
+treatment_df <- subset(treatment_uncleaned, select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais, divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia, trat_codigo, trat_estado,	eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
+
+
+#merging data sets
+
+join1 <- merge(x = catchments_df, y = maintenance_df, by = c("ID"))
+
+join2 <- merge(x = join1, y = treatment_df, by = c("ID"))
+
+join1 <- merge(x = catchments_df, y = maintenance_df, by = c("ID"))
+
+join3 <- merge(x = join2, y = storage_df, by = c("ID"))
+
+total_data <- merge(x = join3, y = distribution_df, by = c("ID"))
+
+write.csv(total_data, file = "cleandata.csv")
+```
+
+```{r}
+#downloading packages
+
+library(mapdata)
+library(ggmap)
+library(ggplot2)
+library(dplyr)
+library('mapsPERU')
+library(sf)
+library(ggthemes)
+
+#cite ggmap if you use it Use `citation("ggmap")` for details.
+```
+
+# Results
+
+The results of Goal 2 are summarized in @fig-bars, which includes the 32 communities from the SIASAR data which had condition/grade data for each of their distribution, storage, and treatment systems. The majority of distribution systems were graded as an A (good condition). The majority of storage systems were graded as a D (non-functioning). The majority of treatment systems were graded as a B (average).
+
+```{r}
+#making a bar chart with counts of conditions per system type
+
+library(ggplot2)
+
+#creating conditions data frame
+
+Treatment <- c(total_data$trat_abcd)
+Storage <- c(total_data$almc_estado)
+Distribution <- c(total_data$dist_estado)
+
+
+conditions_df = data.frame(Treatment, Storage, Distribution)
+
+#translating data from spanish to english
+
+conditions_df$Storage[conditions_df$Storage == "D - CAIDO"] = "D (Non-functioning)"
+
+conditions_df$Storage[conditions_df$Storage == "A - BUENO"] = "A (Good)"
+
+conditions_df$Treatment[conditions_df$Treatment == "A"] = "A (Good)"
+
+conditions_df$Treatment[conditions_df$Treatment == "B"] = "B (Average)"
+
+conditions_df$Treatment[conditions_df$Treatment == "C"] = "C (Poor)"
+
+conditions_df$Distribution[conditions_df$Distribution == "A - BUENO"] = "A (Good)"
+
+conditions_df$Distribution[conditions_df$Distribution == "B - REGULAR"] = "B (Average)"
+
+conditions_df$Distribution[conditions_df$Distribution == "D - CAIDO"] = "D (Non-functioning)"
+
+#pivoting
+library(tidyr)
+
+conditions_df_pivot <- conditions_df |> 
+  pivot_longer(
+    cols = everything(), 
+    names_to = "category", 
+    values_to = "Condition")
+```
+
+```{r}
+#| fig-width: 5
+#| fig-asp: 0.618
+#| fig-cap: Conditions of Community Water Systems
+#| label: fig-bars
+
+#stacked bar graph
+
+bar_fig <- ggplot(conditions_df_pivot, aes(x = category, fill = Condition))+labs(y= "Number of Communities with Rating", x = "Water System Component") + geom_bar()+
+  scale_fill_manual(values=c('#006633', '#FFFF00', '#FF9900', '#CC0000'))+ theme(panel.border = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank())
+
+bar_fig
+```
+
+The results of Goal 3 are summarized in @fig-mapdist, @fig-maptreat, and @fig-mapstor below. These figures show the regions (Cusco, Huánuco, Ica, and Junín) for which complete water system data (distribution, treatment, and storage conditions) were available. White regions labeled as "ND" indicate that complete data was not available. @fig-mapdist, @fig-maptreat, and @fig-mapstorshow show the spatial distribution of distribution, treatment, and storage system conditions, respectively, among the 32 communities with complete data available.
+
+```{r}
+#creating base map
+
+library(mapsPERU)
+library(dplyr)
+
+df_basemap <- map_REG
+
+df_basemap2 <- mutate(df_basemap, Region = c("ND", "ND", "ND", "ND", "ND", "ND", "ND", "Cusco", "ND", "Huánuco", "Ica", "Junin", "ND", "ND", "ND", "ND", "ND", "ND", "ND", "ND", "ND", "ND", "ND", "ND", "ND", "ND"))
+
+#adding filler data that won't be used in analysis so that there are equal number of observations to create map
+
+filler_data <- df_basemap2 |> slice(rep(1, each = 6)) 
+
+df_basemap3 <- rbind(df_basemap2,filler_data)
+
+library(ggplot2)
+library(sf)
+
+
+sites_watersource <- data.frame(longitude = c(total_data$longitud), latitude = c(total_data$latitud), source = c(total_data$fuente_tipo))
+```
+
+```{r}
+#| fig-width: 5
+#| fig-asp: 0.618
+#| fig-cap: Spatial View of Water Distribution System Conditions
+#| label: fig-mapdist
+
+#map of distribution system condition/grades
+
+map_dist_grade <- ggplot(df_basemap3, aes(geometry=geometry)) +
+  geom_sf(aes(fill=Region))+labs(y= "Longitude", x = "Latitude")+
+  scale_fill_manual(values = c("bisque1", "bisque2", "bisque3","bisque4","white")) + geom_point(size=0.1, aes(x = sites_watersource$longitude, y = sites_watersource$latitude, colour =conditions_df$Distribution))+ theme(plot.title = element_text(hjust=0.27, vjust=2.5), panel.border = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank())+labs(color = "Distribution System Condition/Grade")
+
+map_dist_grade
+```
+
+```{r}
+#| fig-width: 5
+#| fig-asp: 0.618
+#| fig-cap: Spatial View of Water Treatment System Conditions
+#| label: fig-maptreat
+
+#map of treatment system condition/grades
+
+map_treat_grade <- ggplot(df_basemap3, aes(geometry=geometry)) +
+  geom_sf(aes(fill=Region))+labs(y= "Longitude", x = "Latitude")+
+  scale_fill_manual(values = c("bisque1", "bisque2", "bisque3","bisque4","white")) + geom_point(size=0.1, aes(x = sites_watersource$longitude, y = sites_watersource$latitude, colour =conditions_df$Treatment))+ theme(plot.title = element_text(hjust=0.3, vjust=2.5), panel.border = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank())+labs(color = "Treatment System Condition/Grade")
+
+map_treat_grade
+```
+
+```{r}
+#| fig-width: 5
+#| fig-asp: 0.618
+#| fig-cap: Spatial View of Water Storage System Conditions
+#| label: fig-mapstor
+
+#map of storage system condition/grades
+
+map_stor_grade <- ggplot(df_basemap3, aes(geometry=geometry)) +
+  geom_sf(aes(fill=Region))+labs(y= "Longitude", x = "Latitude")+
+  scale_fill_manual(values = c("bisque1", "bisque2", "bisque3","bisque4","white")) + geom_point(size=0.1, aes(x = sites_watersource$longitude, y = sites_watersource$latitude, colour =conditions_df$Storage))+ theme(plot.title = element_text(hjust=0.3, vjust=2.5), panel.border = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.grid.minor = element_blank())+labs(color = "Storage System Condition/Grade")
+
+map_stor_grade
+```
+
+The results of Goal 4 are summarized in @tbl-summary below. The values in @tbl-summary are averages or counts of water system parameters among the 32 communities with complete data.
+
+```{r}
+#making data table
+
+library(gt)
+
+#adding column for region
+
+library(stringr)
+
+total_data$region <- c("CUSCO","CUSCO","CUSCO","HUANUCO","HUANUCO","HUANUCO","HUANUCO", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "JUNIN", "JUNIN", "JUNIN", "JUNIN", "JUNIN")
+
+#myturn making tables
+
+#adding column for region
+
+library(stringr)
+library(dplyr)
+
+total_data$region <- c("CUSCO","CUSCO","CUSCO","HUANUCO","HUANUCO","HUANUCO","HUANUCO", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "ICA", "JUNIN", "JUNIN", "JUNIN", "JUNIN", "JUNIN")
+
+#cusco stats
+
+cusco_data <- subset(total_data, region=="CUSCO")
+cusco_avg_homes_served <- mean(cusco_data$viv_servidas)
+cusco_avg_homes_served <- round(cusco_avg_homes_served,0)
+cusco_avg_flow <- mean(cusco_data$caudal)
+
+
+cusco_source_water <- cusco_data |>
+    group_by(fuente_tipo) |>
+    summarise(Count = n()) 
+cusco_surface_water <- 3
+cusco_ground_water <- 0
+
+cusco_gravity_type <- cusco_data |>
+    group_by(tipo_gravedad) |>
+    summarise(Count = n()) 
+cusco_gravity_system_num <- 3
+
+cusco_pump_type <- cusco_data |>
+    group_by(tipo_bombeo) |>
+    summarise(Count = n()) 
+cusco_pump_system_num <- 0
+
+cusco_well_type <- cusco_data |>
+    group_by(tipo_pozo_manual) |>
+    summarise(Count = n()) 
+cusco_well_system_num <- 0
+
+cusco_clor_avg <- mean(cusco_data$cloro_residual)
+cusco_clor_avg<-round(cusco_clor_avg,1)
+
+#huanuco stats
+
+huanuco_data <- subset(total_data, region=="HUANUCO")
+huanuco_avg_homes_served <- mean(huanuco_data$viv_servidas)
+huanuco_avg_homes_served <- round(huanuco_avg_homes_served,0)
+huanuco_avg_flow <- mean(huanuco_data$caudal)
+
+huanuco_source_water <- huanuco_data |>
+    group_by(fuente_tipo) |>
+    summarise(Count = n()) 
+huanuco_surface_water <- 4
+huanuco_ground_water <- 0
+
+huanuco_gravity_type <- huanuco_data |>
+    group_by(tipo_gravedad) |>
+    summarise(Count = n()) 
+huanuco_gravity_system_num <- 2
+
+huanuco_pump_type <- huanuco_data |>
+    group_by(tipo_bombeo) |>
+    summarise(Count = n()) 
+huanuco_pump_system_num <- 0
+
+huanuco_well_type <- huanuco_data |>
+    group_by(tipo_pozo_manual) |>
+    summarise(Count = n()) 
+huanuco_well_system_num <- 2
+
+huanuco_clor_avg <- mean(huanuco_data$cloro_residual)
+huanuco_clor_avg <- round(huanuco_clor_avg,1)
+
+
+#ica stats
+
+ica_data <- subset(total_data, region=="ICA")
+ica_avg_homes_served <- mean(ica_data$viv_servidas)
+ica_avg_homes_served <- round(ica_avg_homes_served,0)
+ica_avg_flow <- mean(ica_data$caudal)
+ica_avg_flow <- round(ica_avg_flow,0)
+
+ica_source_water <- ica_data |>
+    group_by(fuente_tipo) |>
+    summarise(Count = n()) 
+ica_surface_water <- 19
+ica_ground_water <- 1
+
+ica_gravity_type <- ica_data |>
+    group_by(tipo_gravedad) |>
+    summarise(Count = n()) 
+ica_gravity_system_num <- 3
+
+ica_pump_type <- ica_data |>
+    group_by(tipo_bombeo) |>
+    summarise(Count = n()) 
+ica_pump_system_num <- 17
+
+ica_well_type <- ica_data |>
+    group_by(tipo_pozo_manual) |>
+    summarise(Count = n()) 
+ica_well_system_num <- 0
+
+ica_clor_avg <- mean(ica_data$cloro_residual)
+ica_clor_avg <- round(ica_clor_avg,1)
+
+#junin stats
+
+junin_data <- subset(total_data, region=="JUNIN")
+junin_avg_homes_served <- mean(junin_data$viv_servidas)
+junin_avg_flow <- mean(junin_data$caudal)
+junin_avg_flow <- round(junin_avg_flow,0)
+
+junin_source_water <- junin_data |>
+    group_by(fuente_tipo) |>
+    summarise(Count = n()) 
+junin_surface_water <- 5
+junin_ground_water <- 0
+
+junin_gravity_type <- junin_data |>
+    group_by(tipo_gravedad) |>
+    summarise(Count = n()) 
+junin_gravity_system_num <- 2
+
+junin_pump_type <- junin_data |>
+    group_by(tipo_bombeo) |>
+    summarise(Count = n()) 
+junin_pump_system_num <- 0
+
+junin_well_type <- junin_data |>
+    group_by(tipo_pozo_manual) |>
+    summarise(Count = n()) 
+junin_well_system_num <- 3
+
+junin_clor_avg <- mean(junin_data$cloro_residual)
+
+# making table
+table <- data.frame(Region=c("Cusco", "Huanuco", "Ica", "Junin"), "Number of Communities Surveyed"=c(3,4,20,5), "Average # of Households per Community"=c(cusco_avg_homes_served, huanuco_avg_homes_served, ica_avg_homes_served, junin_avg_homes_served), "Average Flow Rate (Liters per second)"=c(cusco_avg_flow, huanuco_avg_flow, ica_avg_flow, junin_avg_flow), "Number of Communities with Surface Water as Primary Source"=c(cusco_surface_water, huanuco_surface_water, ica_surface_water, junin_surface_water), "Number of Communities with Ground Water as Primary Source"=c(cusco_ground_water, huanuco_ground_water, ica_ground_water, junin_ground_water), "Number of Communities with Gravity Distrubution Systems"=c(cusco_gravity_system_num, huanuco_gravity_system_num, ica_gravity_system_num, junin_gravity_system_num), "Number of Communities with Force/Pump Distrubution Systems"=c(cusco_pump_system_num, huanuco_pump_system_num, ica_pump_system_num, junin_pump_system_num), "Number of Communities without Distribution Systems (Collect from Well)"=c(cusco_well_system_num, huanuco_well_system_num, ica_well_system_num, junin_well_system_num), "Average Chlorine Residual in Distribution System (mg/L)"=c(cusco_clor_avg, huanuco_clor_avg, ica_clor_avg, junin_clor_avg), check.names = FALSE)
+```
+
+```{r}
+#| label: tbl-summary
+#| tbl-cap: Summary of Potable Water Systems by Region
+
+table1 <- table |>
+  gt()
+
+table1
+```
+
+# Conclusions
+
+The overarching aim of this project is summarized by Goal 5: Design hypothetical sampling groups for a bacterial regrowth study in Peru. While only 32 communities in 4 regions of Peru contained complete data for this analysis, the 4 regions are likely areas I will have access to. I do not know my specific placement in Peru yet, but it is likely I will be in the central southern area of Peru, as this is an area I have previously done water supply projects in.
+
+One critique of my thesis was that I had a small sampling size, as I was only in Madagascar for 2 months. Ideally, since Peace Corps service is 2 years, I could expand sample sizes to 20 communities per sampling group (5 from reach grade/condition). Based on the visualizations and summary tables created from Goals #1 through #4, the future sampling groups could be arranged as summarized by **Option 1**:
+
+-   Breaking down sampling groups by Treatment System Conditions
+
+    -   There is only 1 community with a treatment system condition of A (Good). Once in country, it would be ideal to find 4 more communities with "good" treatment systems to improve this sampling size to 5 communities. There are 29 communities with a treatment system condition of B (Average). Any 5 of these communities could be picked at random for the B sampling group. There are 2 communities with a treatment system condition of C (Poor). Once in country, it would be ideal to find 3 more communities with "poor" treatment systems to increase this sampling size to 5 communities. There are 0 communities from the data set with a treatment system condition of D (Non-functioning). Once in country, it would be ideal to find 5 more communities with "non-functioning" treatment systems to increase this sampling size to 5 communities.
+
+-   Breaking down sampling groups by Treatment System Conditions
+
+    -   There are 4 communities with a storage system condition of A (Good). Once in country, it would be ideal to find 1 more community with a "good" storage system to improve this sampling size to 5 communities. There are 0 communities with a storage system condition of B (Average) or C( Poor). Once in country, it would be ideal to find 5 communities with "average" storage systems and 5 with "poor" storage conditions. There are 28 communities with a storage system condition of D (non-functioning). Any 5 of these communities could be picked at random for the D sampling group.
+
+-   Breaking down sampling groups by Distribution System Conditions
+
+    -   There are 29 communities with a distribution system condition of A (Good). Any 5 of these communities could be picked at random for the A sampling group. There is 1 community with a distribution system condition of B (Average). Once in country, it would be ideal to find 4 more communities with an "average" distribution system to increase this sampling size to 5 communities. There are 0 communities with a distribution system condition of C (Poor). Once in country, it would be ideal to find 5 more communities with a "poor" distribution system. There are 2 communities with a distribution system condition of D (Non-functioning). Once in country, it would be ideal to find 3 more communities with a "non-functioning" distribution system.
+
+For **Option 1**, future work would also need to include corresponding with the Ministry of Housing, Construction, and Sanitation of Peru (who sourced the SIASAR Data) to understand how they deemed conditions/grades of water systems, so that I could apply similar criteria when looking for other communities to increase the sampling groups that need supplementing.
+
+It is likely that the sampling breakdown listed in **Option 1** would prove challenging. In the case that **Option 1** is not feasible, a simpler sampling plan is summarized in **Option 2**:
+
+-   Sampling groups could be broken down solely based on type of water distribution / collection. There are 10 communities with piped/gravity distribution systems. There are 17 communities with piped/pressurized distribution systems, of which 10 could be randomly picked. There are 5 communities from the data set without a piped network, meaning water is collected from a communal well. Once in country, I could search for 5 more communities with a communal well to bring the well sampling group up to 10. In total, this plan would mean sampling from 30 communities, 10 of which would have gravity piped system, 10 of which would have pressurized pipe systems, and 10 of which would have well systems.
+
+# References

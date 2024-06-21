@@ -1,7 +1,7 @@
-#' portawaterperu: Title goes here
-#' 
-#' Description of the data goes here...
-#' 
+#' portawaterperu: A Preliminary Review of Peruvian Potable Water System Data
+#'
+#' Data for this project was obtained from @SIASAR, an information system containing data on rural water supply and sanitation services. Using SIASAR's "download data by country" tool, all available data for Peru (10 excel files) were downloaded. After examining the 10 excel files, only 5 pertained to potable water systems. Those 5 data sets were imported into R and subsequently empty values and unnecessary columns were deleted from them. Finally, the 5 data sets were combined into 1 data frame based on community ID. The combined, cleaned data set contains data from 32 communities.
+#'
 #' @format A tibble with 6 rows and 18 variables
 #' \describe{
 #'   \item{nombre}{name of community water system}

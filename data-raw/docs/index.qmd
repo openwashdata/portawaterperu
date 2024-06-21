@@ -43,15 +43,16 @@ Data for this project was obtained from @SIASAR, an information system containin
 
 library("readxl")
 
-catchments_uncleaned <- read_xls(here::here("data/raw/system_catchments.PE.xls"))
 
-distribution_uncleaned <- read_xls(here::here("data/raw/system_distribution.PE.xls"))
+catchments_uncleaned <- read_xls(here::here("data-raw/system_catchments.PE.xls"))
 
-maintenance_uncleaned <- read_xls(here::here("data/raw/system_main.PE.xls"))
+distribution_uncleaned <- read_xls(here::here("data-raw/system_distribution.PE.xls"))
 
-storage_uncleaned <- read_xls(here::here("data/raw/system_storage-PE.xls"))
+maintenance_uncleaned <- read_xls(here::here("data-raw/system_main.PE.xls"))
 
-treatment_uncleaned <- read_xls(here::here("data/raw/system_treatment.PE.xls"))
+storage_uncleaned <- read_xls(here::here("data-raw/system_storage-PE.xls"))
+
+treatment_uncleaned <- read_xls(here::here("data-raw/system_treatment.PE.xls"))
 ```
 
 ```{r}

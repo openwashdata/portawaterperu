@@ -55,6 +55,8 @@ join3 <- full_join(join2,  distribution_df)
 
 total_data <- full_join(join3, storage_df)
 
+portawaterperu <- total_data
+
 
 # Export Data ------------------------------------------------------------------
 usethis::use_data(portawaterperu, overwrite = TRUE)

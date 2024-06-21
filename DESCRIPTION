@@ -1,15 +1,21 @@
 Package: portawaterperu
-Title: What the Package Does (One Line, Title Case)
+Title: A Preliminary Review of Peruvian Potable Water System Data
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+    person("Sebastian Camilo", "Loos", , "seba.loos@hotmail.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-8830-1734")),
+    person("Lauren", "Judah", role = "aut")
+  )
+Description: Data for this project was obtained from @SIASAR, an information system containing data on rural water supply and sanitation services. Using SIASAR's "download data by country" tool, all available data for Peru (10 excel files) were downloaded. After examining the 10 excel files, only 5 pertained to potable water systems. Those 5 data sets were imported into R and subsequently empty values and unnecessary columns were deleted from them. Finally, the 5 data sets were combined into 1 data frame based on community ID. The combined, cleaned data set contains data from 32 communities.
+License: CC BY 4.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
 Depends: 
     R (>= 2.10)
 LazyData: true
+Language: en-GB
+Config/Needs/website: rmarkdown
+Date: 2024-06-21
+URL: https://github.com/openwashdata/portawaterperu
+BugReports: https://github.com/openwashdata/portawaterperu/issues

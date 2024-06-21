@@ -32,25 +32,28 @@ treatment_untidy <- read_xls(here::here("data-raw/system_treatment.PE.xls"))
 library(tidyverse)
 
 catchments_df <- subset(catchments_untidy,
-                        select = -c(fecha_encuesta, fecha_validacion, pais, codigo, otras_divisiones ,n_comunidades, n_PSE,financiamientos,monto_financ,monto_rehab,fuente_codigo,fuente_nombre, fuente_principal,	fuente_caudal,	fuente_caudal_ud,	fuente_caudal_fecha,	fuente_caudal_estiaje,	fuente_caudal_estiaje_ud, fuente_caudal_estiaje_fecha, fuente_vegetacion,	fuente_erosion,	fuente_proteccion,	fuente_contaminacion_org,	fuente_contaminacion_inorg,	capt, eiaaut, eiainf, eiazpa, eiastr, eia) )
+                        select = c(nombre,ID,pais,divisiones,latitud,longitud,altitud,año,comunidades,PSE,pob_servida,viv_servidas,tipo_gravedad,tipo_bombeo,tipo_pozo_manual,tipo_agua_lluvia,agua_epoca_seca,agua_epoca_lluvia) )
 
 distribution_df <- subset(distribution_untidy,
-                        select = -c(fecha_encuesta, fecha_validacion, nombre, pais, latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia, dist_codigo, dist_micromed, dist_micromed_opera, dist_distancia, eiaaut, eiainf, eiazpa, eiastr, eia) )
+                        select = c(nombre,ID,pais,divisiones,latitud,longitud,altitud,año,comunidades,PSE,pob_servida,viv_servidas,tipo_gravedad,tipo_bombeo,tipo_pozo_manual,tipo_agua_lluvia,agua_epoca_seca,agua_epoca_lluvia) )
 
 maintenance_df <- subset(maintenance_untidy,
-                        select = -c(fecha_encuesta, fecha_validacion, nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE, pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia, capt_n, capt_tipo_principal,	capt_caudal_total,	capt_caudal_ud,	capt_estado, cond_n,	cond_estado, trat_n, almc_n, almc_volumen, almc_volumen_ud, almc_limpieza, almc_limpieza_ud, almc_estado, dist_n, dist_micromed_consumo, dist_distancia, dist_estado, cloro_fecha, pasa_coliformes, fecha_coliformes,	pasa_fisicoquimico,	fecha_fisicoquimico, eiaaut,	eiainf,	eiazpa,	eiastr,	eia,	siasar_version) )
+                        select = c(nombre,ID,pais,divisiones,latitud,longitud,altitud,año,comunidades,PSE,pob_servida,viv_servidas,tipo_gravedad,tipo_bombeo,tipo_pozo_manual,tipo_agua_lluvia,agua_epoca_seca,agua_epoca_lluvia) )
 
 storage_df <- subset(storage_untidy,
-                        select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia,almc_codigo,	almc_volumen,	almc_volumen_ud,	almc_limpieza, eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
+                        select = c(nombre,ID,pais,divisiones,latitud,longitud,altitud,año,comunidades,PSE,pob_servida,viv_servidas,tipo_gravedad,tipo_bombeo,tipo_pozo_manual,tipo_agua_lluvia,agua_epoca_seca,agua_epoca_lluvia))
 
 treatment_df <- subset(treatment_untidy,
-                        select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais, divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia, trat_codigo, trat_estado,	eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
+                        select = c(nombre,ID,pais,divisiones,latitud,longitud,altitud,año,comunidades,PSE,pob_servida,viv_servidas,tipo_gravedad,tipo_bombeo,tipo_pozo_manual,tipo_agua_lluvia,agua_epoca_seca,agua_epoca_lluvia))
 
 
+join1 <- full_join(catchments_df, maintenance_df)
 
+join2 <- full_join(join1, treatment_df)
 
+join3 <- full_join(join2,  distribution_df)
 
-
+total_data <- full_join(join3, storage_df)
 
 
 # Export Data ------------------------------------------------------------------

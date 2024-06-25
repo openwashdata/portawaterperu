@@ -35,7 +35,7 @@ Depending on how and what you would like to use the data for, the
 description might change. It is based on the student project of Lauren
 Judah..
 
-\## Installation
+## Installation
 
 You can install the development version of portawaterperu from
 [GitHub](https://github.com/) with:
@@ -111,11 +111,21 @@ readr::read_csv("data-raw/dictionary.csv") |>
 
 ```{r}
 library(portawaterperu)
-
+library(ggplot2)
 # Provide some example code here
+portawaterperu |> 
+  #dplyr::filter(stringr::str_starts(divisiones, "AMAZONAS")) |>
+  #dplyr::group_by(divisiones) |> 
+  #dplyr::summarise(mean = mean(pob_servida)) |> 
+  ggplot(aes(y = pob_servida, color = tipo_gravedad))+
+  geom_boxplot(outliers = F)+
+  labs(title = "Population served given different gravity types",
+       y= "Population") +
+  theme_classic()
+  
 ```
 
-Refere to Laurens student project for nice examples. Here report
+Refer to Laurens student project for nice examples. Here report
 index.file is in the data-raw/report-lauren folder...
 
 You will have to adjust the code slightly...

@@ -63,7 +63,7 @@ portawaterperu |>
   gt::as_raw_html()
 ```
 
-<div id="xsclrsfave" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="elmpyriqab" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
     <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
@@ -392,10 +392,25 @@ portawaterperu |>
 
 <img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
 
-Refer to Laurens student project for nice examples. Here report
-index.file is in the data-raw/report-lauren folder…
+## Capstone Project
 
-You will have to adjust the code slightly…
+This dataset is shared as part of a capstone project in Data Science for
+openwashdata. For more information about the project and to explore
+further insights, please visit the project page at
+<https://ds4owd-001.github.io/project-laurenjudah/> (to be public
+available)
+
+## Methodology
+
+The data was obtained from @SIASAR, an information system containing
+data on rural water supply and sanitation services. Using SIASAR’s
+“download data by country” tool, all available data for Peru (10 excel
+files) were downloaded. After examining the 10 excel files, only 5
+pertained to potable water systems. Those 5 data sets were imported into
+R and subsequently empty values and unnecessary columns were deleted
+from them. Finally, the 5 data sets were combined into 1 data frame
+based on community ID. The combined, cleaned data set contains data from
+32 communities.
 
 ## License
 
@@ -410,15 +425,15 @@ Please cite this package using:
 citation("portawaterperu")
 #> To cite package 'portawaterperu' in publications use:
 #> 
-#>   Loos S, Judah L (2024). _portawaterperu: A Preliminary Review of
-#>   Peruvian Potable Water System Data_. R package version 0.0.0.9000,
-#>   <https://github.com/openwashdata/portawaterperu>.
+#>   Judah L, Loos S, Zhong M (2024). _portawaterperu: A Preliminary
+#>   Review of Peruvian Potable Water System Data_. R package version
+#>   0.0.0.9000, <https://github.com/openwashdata/portawaterperu>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {portawaterperu: A Preliminary Review of Peruvian Potable Water System Data},
-#>     author = {Sebastian Camilo Loos and Lauren Judah},
+#>     author = {Lauren Judah and Sebastian Camilo Loos and Mian Zhong},
 #>     year = {2024},
 #>     note = {R package version 0.0.0.9000},
 #>     url = {https://github.com/openwashdata/portawaterperu},

@@ -49,9 +49,15 @@ distribution_df <- subset(distribution_untidy,
                                       agua_epoca_seca,	agua_epoca_lluvia,
                                       dist_codigo, dist_micromed, dist_micromed_opera,
                                       dist_distancia, eiaaut, eiainf, eiazpa,
-                                      eiastr, eia))
+                                      eiastr, eia, divisiones))
 
-maintenance_df <- subset(maintenance_untidy, select = -c(fecha_encuesta, fecha_validacion, nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE, pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia, capt_n, capt_tipo_principal,	capt_caudal_total,	capt_caudal_ud,	capt_estado, cond_n,	cond_estado, trat_n, almc_n, almc_volumen, almc_volumen_ud, almc_limpieza, almc_limpieza_ud, almc_estado, dist_n, dist_micromed_consumo, dist_distancia, dist_estado, cloro_fecha, pasa_coliformes, fecha_coliformes,	pasa_fisicoquimico,	fecha_fisicoquimico, eiaaut,	eiainf,	eiazpa,	eiastr,	eia,	siasar_version) )
+maintenance_df <- subset(maintenance_untidy, select = -c(nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,
+                                                         trat_estado, PSE, pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,
+                                                         tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia, capt_n, capt_tipo_principal,
+                                                         capt_caudal_total,	capt_caudal_ud,	capt_estado, cond_n,	cond_estado,
+                                                         trat_n, almc_n, almc_volumen, almc_volumen_ud, almc_limpieza, almc_limpieza_ud, almc_estado,
+                                                         dist_n, dist_micromed_consumo, dist_distancia, dist_estado, cloro_fecha, pasa_coliformes, fecha_coliformes,
+                                                         pasa_fisicoquimico,	fecha_fisicoquimico, eiaaut,	eiainf,	eiazpa,	eiastr,	eia,	siasar_version, dist_horas, dist_conexion, dist_micromed) )
 
 storage_df <- subset(storage_untidy, select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia,almc_codigo,	almc_volumen,	almc_volumen_ud,	almc_limpieza, eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
 
@@ -66,12 +72,13 @@ portawaterperu <- catchments_df |>
 portawaterperu <- portawaterperu |>
   dplyr::rename(
     name = nombre,
-    div = divisiones.x,
+    div = divisiones,
     lat = latitud,
     long = longitud,
     alt = altitud,
     year = año,
     community = comunidades,
+    service_provider = PSE, # PSE stands for Prestador de servicio
     pop_serviced = pob_servida,
     hh_serviced = viv_servidas,
     type_gravity = tipo_gravedad,
@@ -83,17 +90,56 @@ portawaterperu <- portawaterperu |>
     source_id = fuente_ID,
     source_type = fuente_tipo,
     source_lat = fuente_latitud,
-    source_long = fuente_longitud
+    source_long = fuente_longitud,
+    source_alt = fuente_altitud,
+    catch_macromeasure = capt_macromedicion,
+    catch_status = capt_estado,
+    maintenance_date = fecha_encuesta,
+    date_validation = fecha_validacion,
+    catch_abcd = capt_abcd,
+    treat_type = trat_tipos,
+    treat_abcd = trat_abcd,
+    storage_abcd = almc_abcd,
+    flow = caudal,
+    flow_unit = caudal_ud,
+    chlorine = cloro,
+    filtration = filtracion,
+    chlorine_res = cloro_residual,
+    chlorine_res_unit = cloro_residual_ud,
+    treatment_ID = trat_ID,
+    treatment_type = trat_tipo,
+    treatment_function = trat_funciona,
+    treatment_lat = trat_latitud,
+    treatment_long = trat_longitud,
+    treatment_alt = trat_altitud,
+    storage_ID = almc_ID,
+    storage_clean_unit = almc_limpieza_ud,
+    storage_lat = almc_latitud,
+    storage_long = almc_longitud,
+    storage_alt = almc_altitud,
+    storage_status = almc_estado,
+    dist_hour = dist_horas,
+    dist_connection = dist_conexiones,
+    dist_status = dist_estado
   ) #TODO: To be complete, dictionary not complete
 
 ### Modify variable types
 portawaterperu <- portawaterperu |>
   dplyr::mutate(across(c(type_gravity, type_pump, type_well, type_rain,
                          water_dry_season, water_rain_season,
-                         trat_funciona), ~ dplyr::if_else(. == "SI", TRUE, FALSE))) |>
-  dplyr::mutate(across(c(source_type, capt_estado, capt_abcd, cond_abcd,
-                         trat_tipos, trat_abcd, almc_abcd, dist_abcd),
+                         treatment_function), ~ dplyr::if_else(. == "SI", TRUE, FALSE))) |>
+  dplyr::mutate(across(c(source_type, catch_status, catch_abcd, cond_abcd,
+                         treatment_type, treat_abcd, storage_abcd, dist_abcd),
                        as.factor))
+### Translate factor value from spanish to english
+portawaterperu <- portawaterperu |>
+  dplyr::mutate(source_type = case_match(
+    source_type,
+    "Lago" ~ "lake",
+    "Pozo excavado" ~ "dug well",
+    "Pozo Perforado" ~ "drilled well",
+    "Río" ~ "river"
+  ))
 
 # Export Data ------------------------------------------------------------------
 usethis::use_data(portawaterperu, overwrite = TRUE)

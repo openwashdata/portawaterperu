@@ -1,48 +1,55 @@
 directory,file_name,variable_name,variable_type,description
-data,portawaterperu.rda,nombre,character, name of community water system
-data,portawaterperu.rda,ID,double,identification number (unique to each water system)
-data,portawaterperu.rda,pais,character,Country of data collection
-data,portawaterperu.rda,divisiones,character,geographic division (region; province; district)
-data,portawaterperu.rda,latitud,double,latitude of district
-data,portawaterperu.rda,longitud,double,longitude of district
-data,portawaterperu.rda,altitud,double,altitude of district
-data,portawaterperu.rda,ano,double,year water system data was collected
-data,portawaterperu.rda,comunidades,character,community/municipality/town name
-data,portawaterperu.rda,PSE,character, water service provider
-data,portawaterperu.rda,pob_servida,double,population number served by water service provider
-data,portawaterperu.rda,viv_servidas,double,household number served by water service provider
-data,portawaterperu.rda,tipo_gravedad,character,is the community served by a gravity distribution system?
-data,portawaterperu.rda,tipo_bombeo,character,is the community served by a force/pump distribution system
-data,portawaterperu.rda,tipo_pozo_manual,character,is the community served by a well system (communal collection point / no distribution pipes)
-data,portawaterperu.rda,tipo_agua_lluvia,character,rain water (not sure in what regard this relates to water system won't use in analysis)
-data,portawaterperu.rda,agua_epoca_seca,character,dry season water (not sure in what regard this relates to water system won't use in analysis)
-data,portawaterperu.rda,agua_epoca_lluvia,character,rainy season water (not sure in what regard this relates to water system won't use in analysis)
-NA,NA,fuente_tipo,NA,type of water source
-NA,NA,fuente_principal,NA,is it the primary source of potable water? Options are surface water (river or dug well)
-NA,NA,fuente_latitud,NA,water source latitude
-NA,NA,fuente_longitud,NA,water source longitude
-NA,NA,fuente_altitud,NA,water source altitude
-NA,NA,fuente_proteccion,NA, is the source water protected? (not sure what defines protection
-NA,NA,fuente_contaminacion_org,NA, does the source water have organic contamination?
-NA,NA,fuente_contaminacion_inorg,NA, does the source water have inorganic contamination?
-NA,NA,dist_horas,NA,distrubution hours
-NA,NA,dist_distancia,NA,distrubution pipes distance
-NA,NA,cond_abcd,NA,grade/condition of maintenance (a is good;  c is poor;  d is nonfunctioning)
-NA,NA,trat_tipos,NA,treatment type (chlorination or slow sand filtration)
-NA,NA,trat_abcd,NA,grade/condition of treatment system (a is good;  c is poor;  d is nonfunctioning)
-NA,NA,dist_abcd,NA,grade/condition of distribution system (a is good;  c is poor;  d is nonfunctioning)
-NA,NA,caudal,NA,flow rate
-NA,NA,caudal_ud,NA,flow rate unit (liters per second)
-NA,NA,cloro_residual,NA,residual chlorine level in distribution system
-NA,NA,cloro_residual_ud,NA,residual chlorine units (milligrams per liter)
-NA,NA,almc_ID,NA,storage system identification number
-NA,NA,almc_limpieza_ud,NA,storage system cleaning frequency
-NA,NA,almc_latitud,NA,storage system latitude
-NA,NA,almc_longitud,NA,storage system longitude
-NA,NA,almc_altitud,NA,storage system altitude
-NA,NA,almc_abcd,NA, grade/condition of storage system (a is good;  c is poor;  d is nonfunctioning)
-NA,NA,trat_ID,NA,treatment system ID
-NA,NA,trat_funciona,NA,is system treatment functioning?
-NA,NA,trat_latitud,NA,treatment system latitude
-NA,NA,trat_longitud,NA,treatment system longitude
-NA,NA,trat_altitud,NA,treatment system altitude
+data,portawaterperu.rda,name,character,Name of the community water system
+data,portawaterperu.rda,ID,numeric,ID of the water system
+data,portawaterperu.rda,div,character," ""Geographical division of the community"""
+data,portawaterperu.rda,lat,numeric," ""Latitude of the community"""
+data,portawaterperu.rda,long,numeric," ""Longitude of the community"""
+data,portawaterperu.rda,alt,numeric," ""Altitude of the community"""
+data,portawaterperu.rda,year,numeric," ""Year of data collection. (Use in caution)"
+data,portawaterperu.rda,community,character,Community name
+data,portawaterperu.rda,service_provider,character,Service provider (PSE stands for Prestador de servicio)
+data,portawaterperu.rda,pop_serviced,numeric,Population served
+data,portawaterperu.rda,hh_serviced,numeric,Household served
+data,portawaterperu.rda,type_gravity,logical,Is the community served by a gravity water supply system?
+data,portawaterperu.rda,type_pump,logical,Is the community served by a pumped water supply system?
+data,portawaterperu.rda,type_well,logical,Is the community served by a well/hand pump water supply system?
+data,portawaterperu.rda,type_rain,logical,Is the community served by a rainwater harvesting water supply system?
+data,portawaterperu.rda,water_dry_season,logical,Are there adequate water resources (at the source) to meet demand in dry season?
+data,portawaterperu.rda,water_rain_season,logical,Are there adequate water resources (at the source) to meet demand in rainy season?
+data,portawaterperu.rda,source_id,numeric,ID of the water source
+data,portawaterperu.rda,source_type,character,"Type of the water source, options including (1) lake, (2) river, (3) dug well, and (4) drilled well."
+data,portawaterperu.rda,source_lat,numeric,Latitude of the water source
+data,portawaterperu.rda,source_long,numeric,Longitude of the water source
+data,portawaterperu.rda,source_alt,numeric,Altitude of the water source
+data,portawaterperu.rda,catch_macromeasure,character,Macro measurement of catchment
+data,portawaterperu.rda,catch_status,factor,"Status of the catchment, options including (1) A: good, (2) B: regular, and (3) C: bad."
+data,portawaterperu.rda,maintenance_date,"c(""POSIXct"", ""POSIXt"")",Date of the maintainance data collection
+data,portawaterperu.rda,date_validation,logical,
+data,portawaterperu.rda,catch_abcd,factor,Status of catchment at maintainance
+data,portawaterperu.rda,cond_abcd,factor,Status of condition at maintainance
+data,portawaterperu.rda,treat_type,character,Type of treatment
+data,portawaterperu.rda,treat_abcd,factor,Status of treatment at maintainance
+data,portawaterperu.rda,storage_abcd,factor,Status of the storage system at maintainance
+data,portawaterperu.rda,dist_abcd,factor,Status of the distribution network at maintainance
+data,portawaterperu.rda,flow,numeric,"Flow rate, check unit with column "
+data,portawaterperu.rda,flow_unit,character,Unit of flow rate
+data,portawaterperu.rda,chlorine,character,
+data,portawaterperu.rda,filtration,character,
+data,portawaterperu.rda,chlorine_res,numeric,Chlorine residual
+data,portawaterperu.rda,chlorine_res_unit,character,Unit of chlorine residual
+data,portawaterperu.rda,treatment_ID,numeric,ID of the treatment
+data,portawaterperu.rda,treatment_type,factor,Type of the treatment
+data,portawaterperu.rda,treatment_function,logical,Is treatment functional?
+data,portawaterperu.rda,treatment_lat,numeric,Latitude of the water treatment
+data,portawaterperu.rda,treatment_long,numeric,Longitude of the water treatment
+data,portawaterperu.rda,treatment_alt,numeric,Altitude of the water treatment
+data,portawaterperu.rda,storage_ID,numeric,ID of the water storage infrastructure.
+data,portawaterperu.rda,storage_clean_unit,character,Latitude of the water storage infrastructure.
+data,portawaterperu.rda,storage_lat,numeric,Longitude of the water storage infrastructure.
+data,portawaterperu.rda,storage_long,numeric,Altitude of the water storage infrastructure.
+data,portawaterperu.rda,storage_alt,numeric,"Status of the water storage infrastructure, options including (1) A, (2) B, (3) C, and (4) D."
+data,portawaterperu.rda,storage_status,character,
+data,portawaterperu.rda,dist_ID,numeric,ID of the distribution system
+data,portawaterperu.rda,dist_hour,numeric,Hours of service per day
+data,portawaterperu.rda,dist_connection,numeric,Number of distribution network connections
+data,portawaterperu.rda,dist_status,character,Status of the distribution system

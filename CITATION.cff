@@ -1,0 +1,45 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "portawaterperu" in publications use:'
+type: software
+license: CC-BY-4.0
+title: 'portawaterperu: A Preliminary Review of Peruvian Potable Water System Data'
+version: 0.0.0.9000
+abstract: Data to gain preliminary understanding of community potable water systems
+  in Peru.
+authors:
+- family-names: Judah
+  given-names: Lauren
+- family-names: Loos
+  given-names: Sebastian Camilo
+  email: seba.loos@hotmail.com
+  orcid: https://orcid.org/0000-0002-8830-1734
+- family-names: Zhong
+  given-names: Mian
+  email: mzhong@ethz.ch
+  orcid: https://orcid.org/0009-0009-4546-7214
+repository-code: https://github.com/openwashdata/portawaterperu
+url: https://github.com/openwashdata/portawaterperu
+date-released: '2024-06-21'
+contact:
+- family-names: Loos
+  given-names: Sebastian Camilo
+  email: seba.loos@hotmail.com
+  orcid: https://orcid.org/0000-0002-8830-1734
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2024'
+  version: '>= 2.10'
+

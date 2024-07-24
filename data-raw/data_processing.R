@@ -57,9 +57,13 @@ maintenance_df <- subset(maintenance_untidy, select = -c(nombre, pais,	divisione
                                                          capt_caudal_total,	capt_caudal_ud,	capt_estado, cond_n,	cond_estado,
                                                          trat_n, almc_n, almc_volumen, almc_volumen_ud, almc_limpieza, almc_limpieza_ud, almc_estado,
                                                          dist_n, dist_micromed_consumo, dist_distancia, dist_estado, cloro_fecha, pasa_coliformes, fecha_coliformes,
-                                                         pasa_fisicoquimico,	fecha_fisicoquimico, eiaaut,	eiainf,	eiazpa,	eiastr,	eia,	siasar_version, dist_horas, dist_conexion, dist_micromed) )
+                                                         pasa_fisicoquimico,	fecha_fisicoquimico, eiaaut,	eiainf,	eiazpa,	eiastr,	eia,	siasar_version,
+                                                         dist_horas, dist_conexion, dist_micromed, cloro, filtracion) )
 
-storage_df <- subset(storage_untidy, select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia,almc_codigo,	almc_volumen,	almc_volumen_ud,	almc_limpieza, eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
+storage_df <- subset(storage_untidy, select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,
+                                                 n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,
+                                                 tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia,
+                                                 almc_codigo,	almc_volumen,	almc_volumen_ud,	almc_limpieza, eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
 
 treatment_df <- subset(treatment_untidy, select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais, divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia, trat_codigo, trat_estado,	eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
 ### Combine data
@@ -102,8 +106,6 @@ portawaterperu <- portawaterperu |>
     storage_abcd = almc_abcd,
     flow = caudal,
     flow_unit = caudal_ud,
-    chlorine = cloro,
-    filtration = filtracion,
     chlorine_res = cloro_residual,
     chlorine_res_unit = cloro_residual_ud,
     treatment_ID = trat_ID,
@@ -121,16 +123,9 @@ portawaterperu <- portawaterperu |>
     dist_hour = dist_horas,
     dist_connection = dist_conexiones,
     dist_status = dist_estado
-  ) #TODO: To be complete, dictionary not complete
+  )
 
-### Modify variable types
-portawaterperu <- portawaterperu |>
-  dplyr::mutate(across(c(type_gravity, type_pump, type_well, type_rain,
-                         water_dry_season, water_rain_season,
-                         treatment_function), ~ dplyr::if_else(. == "SI", TRUE, FALSE))) |>
-  dplyr::mutate(across(c(source_type, catch_status, catch_abcd, cond_abcd,
-                         treatment_type, treat_abcd, storage_abcd, dist_abcd),
-                       as.factor))
+
 ### Translate factor value from spanish to english
 portawaterperu <- portawaterperu |>
   dplyr::mutate(source_type = case_match(
@@ -140,6 +135,14 @@ portawaterperu <- portawaterperu |>
     "Pozo Perforado" ~ "drilled well",
     "Río" ~ "river"
   ))
+### Modify variable types
+portawaterperu <- portawaterperu |>
+  dplyr::mutate(across(c(type_gravity, type_pump, type_well, type_rain,
+                         water_dry_season, water_rain_season,
+                         treatment_function), ~ dplyr::if_else(. == "SI", TRUE, FALSE))) |>
+  dplyr::mutate(across(c(source_type, catch_status, catch_abcd, cond_abcd,
+                         treatment_type, treat_abcd, storage_abcd, dist_abcd, storage_status),
+                       as.factor))
 
 # Export Data ------------------------------------------------------------------
 usethis::use_data(portawaterperu, overwrite = TRUE)

@@ -31,9 +31,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: end -->
 
-Depending on how and what you would like to use the data for, the
-description might change. It is based on the student project of Lauren
-Judah..
+The goal of the package `portawaterperu` is to provide access to data about community portable water systems in Peru. The data is collected from SIASAR database consisted of information and surveys about water catchments, storage system, treatment, distribution networks and maintainance. 
 
 ## Installation
 

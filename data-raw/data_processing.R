@@ -57,9 +57,13 @@ maintenance_df <- subset(maintenance_untidy, select = -c(nombre, pais,	divisione
                                                          capt_caudal_total,	capt_caudal_ud,	capt_estado, cond_n,	cond_estado,
                                                          trat_n, almc_n, almc_volumen, almc_volumen_ud, almc_limpieza, almc_limpieza_ud, almc_estado,
                                                          dist_n, dist_micromed_consumo, dist_distancia, dist_estado, cloro_fecha, pasa_coliformes, fecha_coliformes,
-                                                         pasa_fisicoquimico,	fecha_fisicoquimico, eiaaut,	eiainf,	eiazpa,	eiastr,	eia,	siasar_version, dist_horas, dist_conexion, dist_micromed) )
+                                                         pasa_fisicoquimico,	fecha_fisicoquimico, eiaaut,	eiainf,	eiazpa,	eiastr,	eia,	siasar_version,
+                                                         dist_horas, dist_conexion, dist_micromed, cloro, filtracion, fecha_validacion) )
 
-storage_df <- subset(storage_untidy, select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia,almc_codigo,	almc_volumen,	almc_volumen_ud,	almc_limpieza, eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
+storage_df <- subset(storage_untidy, select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais,	divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,
+                                                 n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,
+                                                 tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia,
+                                                 almc_codigo,	almc_volumen,	almc_volumen_ud,	almc_limpieza, eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
 
 treatment_df <- subset(treatment_untidy, select = -c(fecha_encuesta,	fecha_validacion,	nombre, pais, divisiones,	latitud,	longitud,	altitud,	codigo,	otras_divisiones,	año,	n_comunidades,	n_PSE,	comunidades,	PSE,	pob_servida,	viv_servidas,	financiamientos,	monto_financ,	monto_rehab,	tipo_gravedad,	tipo_bombeo,	tipo_pozo_manual,	tipo_agua_lluvia,	agua_epoca_seca,	agua_epoca_lluvia, trat_codigo, trat_estado,	eiaaut,	eiainf,	eiastr,	eiazpa,	eia))
 ### Combine data
@@ -95,15 +99,12 @@ portawaterperu <- portawaterperu |>
     catch_macromeasure = capt_macromedicion,
     catch_status = capt_estado,
     maintenance_date = fecha_encuesta,
-    date_validation = fecha_validacion,
     catch_abcd = capt_abcd,
     treat_type = trat_tipos,
     treat_abcd = trat_abcd,
     storage_abcd = almc_abcd,
     flow = caudal,
     flow_unit = caudal_ud,
-    chlorine = cloro,
-    filtration = filtracion,
     chlorine_res = cloro_residual,
     chlorine_res_unit = cloro_residual_ud,
     treatment_ID = trat_ID,
@@ -137,8 +138,9 @@ portawaterperu <- portawaterperu |>
   dplyr::mutate(treat_type = case_match(
     treat_type,
     "Desinfección con cloro" ~ "desinfection with chlorine",
-    "Filtración" ~ "filtration"
+    "Filtración lenta" ~ "slow filtration"
   ))
+
 ### Modify variable types
 portawaterperu <- portawaterperu |>
   dplyr::mutate(across(c(type_gravity, type_pump, type_well, type_rain,
@@ -146,7 +148,7 @@ portawaterperu <- portawaterperu |>
                          treatment_function), ~ dplyr::if_else(. == "SI", TRUE, FALSE))) |>
   dplyr::mutate(across(c(source_type, catch_status, catch_abcd, cond_abcd,
                          treatment_type, treat_abcd, storage_abcd, dist_abcd,
-                         treat_type),
+                         treat_type, storage_status, dist_status),
                        as.factor))
 
 

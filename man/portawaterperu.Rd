@@ -5,26 +5,59 @@
 \alias{portawaterperu}
 \title{portawaterperu: A Preliminary Review of Peruvian Potable Water System Data}
 \format{
-A tibble with 6 rows and 18 variables
+A tibble with 32 rows and 51 variables
 \describe{
-\item{nombre}{name of community water system}
-\item{ID}{identification number (unique to each water system)}
-\item{pais}{Country of data collection}
-\item{divisiones}{geographic division (region; province; district)}
-\item{latitud}{latitude of district}
-\item{longitud}{longitude of district}
-\item{altitud}{altitude of district}
-\item{ano}{year water system data was collected}
-\item{comunidades}{community/municipality/town name}
-\item{PSE}{water service provider}
-\item{pob_servida}{population number served by water service provider}
-\item{viv_servidas}{household number served by water service provider}
-\item{tipo_gravedad}{is the community served by a gravity distribution system?}
-\item{tipo_bombeo}{is the community served by a force/pump distribution system}
-\item{tipo_pozo_manual}{is the community served by a well system (communal collection point / no distribution pipes)}
-\item{tipo_agua_lluvia}{rain water (not sure in what regard this relates to water system won't use in analysis)}
-\item{agua_epoca_seca}{dry season water (not sure in what regard this relates to water system won't use in analysis)}
-\item{agua_epoca_lluvia}{rainy season water (not sure in what regard this relates to water system won't use in analysis)}
+\item{name}{Name of the community water system}
+\item{ID}{ID of the water system}
+\item{div}{Geographical division of the community}
+\item{lat}{Latitude of the community}
+\item{long}{Longitude of the community}
+\item{alt}{Altitude of the community}
+\item{year}{Year of data collection about communities. (Use in caution)}
+\item{community}{Community name}
+\item{service_provider}{Service provider (PSE stands for Prestador de servicio)}
+\item{pop_serviced}{Population served}
+\item{hh_serviced}{Household served}
+\item{type_gravity}{Is the community served by a gravity water supply system?}
+\item{type_pump}{Is the community served by a pumped water supply system?}
+\item{type_well}{Is the community served by a well/hand pump water supply system?}
+\item{type_rain}{Is the community served by a rainwater harvesting water supply system?}
+\item{water_dry_season}{Are there adequate water resources (at the source) to meet demand in dry season?}
+\item{water_rain_season}{Are there adequate water resources (at the source) to meet demand in rainy season?}
+\item{source_id}{ID of the water source}
+\item{source_type}{Type of the water source, options including (1) lake, (2) river, (3) dug well, and (4) drilled well.}
+\item{source_lat}{Latitude of the water source}
+\item{source_long}{Longitude of the water source}
+\item{source_alt}{Altitude of the water source}
+\item{catch_macromeasure}{Macro measurement of catchment}
+\item{catch_status}{Status of the catchment, options including (1) A: good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.}
+\item{maintenance_date}{Date of the maintainance data collection}
+\item{catch_abcd}{Status of catchment at maintainance, options including (1) A: good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.}
+\item{cond_abcd}{Status of condition at maintainance, options including (1) A: good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.}
+\item{treat_type}{Type of treatment, options including (1) desinfection with chlorine and (2) slow filtration.}
+\item{treat_abcd}{Status of treatment at maintainance, options including (1) A: good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.}
+\item{storage_abcd}{Status of the storage system at maintainance, options including (1) A: good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.}
+\item{dist_abcd}{Status of the distribution network at maintainance, options including (1) A: good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.}
+\item{flow}{Flow rate, check unit with column}
+\item{flow_unit}{Unit of flow rate}
+\item{chlorine_res}{Chlorine residual}
+\item{chlorine_res_unit}{Unit of chlorine residual}
+\item{treatment_ID}{ID of the treatment}
+\item{treatment_type}{Type of the treatment}
+\item{treatment_function}{Is treatment functional?}
+\item{treatment_lat}{Latitude of the water treatment}
+\item{treatment_long}{Longitude of the water treatment}
+\item{treatment_alt}{Altitude of the water treatment}
+\item{storage_ID}{ID of the water storage infrastructure.}
+\item{storage_clean_unit}{Unit of cleaning frequency of the storage system}
+\item{storage_lat}{Latitude of the water storage infrastructure.}
+\item{storage_long}{Longitude of the water storage infrastructure.}
+\item{storage_alt}{Altitude of the water storage infrastructure.}
+\item{storage_status}{Status of the water storage infrastructure, options including (1) A: good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.}
+\item{dist_ID}{ID of the distribution system}
+\item{dist_hour}{Hours of service per day}
+\item{dist_connection}{Number of distribution network connections}
+\item{dist_status}{Status of the distribution system, options including (1) A: good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.}
 }
 }
 \usage{

@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">portawaterperu</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,7 +62,6 @@
 </h1></div>
 <!-- badges: start -->
 
-<!-- badges: end -->
 <p>The goal of the package <code>portawaterperu</code> is to provide access to data about community portable water systems in Peru. The data is collected from SIASAR database consisted of information and surveys about water catchments, storage system, treatment, distribution networks and maintainance.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -114,7 +113,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/as_raw_html.html" class="external-link">as_raw_html</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="eouknuqrfo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rutvwqeijw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 
 
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
@@ -1350,7 +1349,12 @@ Status of the distribution system, options including (1) A: good, (2) B: fair, (
 <h2 id="methodology">Methodology<a class="anchor" aria-label="anchor" href="#methodology"></a>
 </h2>
 <p>The data was obtained from @SIASAR, an information system containing data on rural water supply and sanitation services. Using SIASAR’s “download data by country” tool, all available data for Peru (10 excel files) were downloaded. After examining the 10 excel files, only 5 pertained to potable water systems. Those 5 data sets were imported into R and subsequently empty values and unnecessary columns were deleted from them. Finally, the 5 data sets were combined into 1 data frame based on community ID. The combined, cleaned data set contains data from 32 communities.</p>
-<p>Documentaion of the dataset went through: <a href="https://globalsiasar.org/sites/default/files/documents/water_supply_system_v10.pdf" class="external-link uri">https://globalsiasar.org/sites/default/files/documents/water_supply_system_v10.pdf</a></p>
+<p>SIASAR does not provide a matching data dictionary. openwashdata developer went through the attachements of the original questionnaire:</p>
+<ul>
+<li><a href="https://globalsiasar.org/es/content/documentacion-tecnica" class="external-link uri">https://globalsiasar.org/es/content/documentacion-tecnica</a></li>
+<li><a href="https://globalsiasar.org/en/content/technical-documentation" class="external-link uri">https://globalsiasar.org/en/content/technical-documentation</a></li>
+</ul>
+<p>The variable description is written with our best guess with the information from the attachements.</p>
 </div>
 <div class="section level2">
 <h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
@@ -1367,7 +1371,7 @@ Status of the distribution system, options including (1) A: good, (2) B: fair, (
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Judah L, Loos S, Zhong M (2024). _portawaterperu: A Preliminary</span></span>
 <span><span class="co">#&gt;   Review of Peruvian Potable Water System Data_. R package version</span></span>
-<span><span class="co">#&gt;   0.0.0.9000, &lt;https://github.com/openwashdata/portawaterperu&gt;.</span></span>
+<span><span class="co">#&gt;   0.0.1, &lt;https://github.com/openwashdata/portawaterperu&gt;.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -1375,7 +1379,7 @@ Status of the distribution system, options including (1) A: good, (2) B: fair, (
 <span><span class="co">#&gt;     title = {portawaterperu: A Preliminary Review of Peruvian Potable Water System Data},</span></span>
 <span><span class="co">#&gt;     author = {Lauren Judah and Sebastian Camilo Loos and Mian Zhong},</span></span>
 <span><span class="co">#&gt;     year = {2024},</span></span>
-<span><span class="co">#&gt;     note = {R package version 0.0.0.9000},</span></span>
+<span><span class="co">#&gt;     note = {R package version 0.0.1},</span></span>
 <span><span class="co">#&gt;     url = {https://github.com/openwashdata/portawaterperu},</span></span>
 <span><span class="co">#&gt;   }</span></span></code></pre></div>
 </div>
@@ -1411,6 +1415,7 @@ Status of the distribution system, options including (1) A: good, (2) B: fair, (
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://creativecommons.org/licenses/by/4.0/" class="external-link"><img src="https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg" alt="License: CC BY 4.0"></a></li>
+<li><a href="https://github.com/openwashdata/portawaterperu/actions/workflows/R-CMD-check.yaml"><img src="https://github.com/openwashdata/portawaterperu/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
 

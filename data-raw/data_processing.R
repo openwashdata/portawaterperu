@@ -121,16 +121,8 @@ portawaterperu <- portawaterperu |>
     dist_hour = dist_horas,
     dist_connection = dist_conexiones,
     dist_status = dist_estado
-  ) #TODO: To be complete, dictionary not complete
+  )
 
-### Modify variable types
-portawaterperu <- portawaterperu |>
-  dplyr::mutate(across(c(type_gravity, type_pump, type_well, type_rain,
-                         water_dry_season, water_rain_season,
-                         treatment_function), ~ dplyr::if_else(. == "SI", TRUE, FALSE))) |>
-  dplyr::mutate(across(c(source_type, catch_status, catch_abcd, cond_abcd,
-                         treatment_type, treat_abcd, storage_abcd, dist_abcd),
-                       as.factor))
 ### Translate factor value from spanish to english
 portawaterperu <- portawaterperu |>
   dplyr::mutate(source_type = case_match(
@@ -140,6 +132,23 @@ portawaterperu <- portawaterperu |>
     "Pozo Perforado" ~ "drilled well",
     "Río" ~ "river"
   ))
+
+portawaterperu <- portawaterperu |>
+  dplyr::mutate(treat_type = case_match(
+    treat_type,
+    "Desinfección con cloro" ~ "desinfection with chlorine",
+    "Filtración" ~ "filtration"
+  ))
+### Modify variable types
+portawaterperu <- portawaterperu |>
+  dplyr::mutate(across(c(type_gravity, type_pump, type_well, type_rain,
+                         water_dry_season, water_rain_season,
+                         treatment_function), ~ dplyr::if_else(. == "SI", TRUE, FALSE))) |>
+  dplyr::mutate(across(c(source_type, catch_status, catch_abcd, cond_abcd,
+                         treatment_type, treat_abcd, storage_abcd, dist_abcd,
+                         treat_type),
+                       as.factor))
+
 
 # Export Data ------------------------------------------------------------------
 usethis::use_data(portawaterperu, overwrite = TRUE)

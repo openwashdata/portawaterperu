@@ -77,7 +77,7 @@ read_csv("data-raw/dictionary.csv") |>
 
 ## Data
 
-The package provides access to ...
+The package provides access to one dataset `portawaterperu`.
 
 ```{r}
 library(portawaterperu)
@@ -85,7 +85,7 @@ library(portawaterperu)
 
 ### portawaterperu
 
-The dataset `portawaterperu` contains data about ... It has
+The dataset `portawaterperu` contains data abour portable water system from 32 communities in Peru. It has
 `r nrow(portawaterperu)` observations and `r ncol(portawaterperu)`
 variables
 

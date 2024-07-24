@@ -1,6 +1,6 @@
 Package: portawaterperu
 Title: A Preliminary Review of Peruvian Potable Water System Data
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: c(
     person("Lauren", "Judah", role = "aut"),
     person("Sebastian Camilo", "Loos", , "seba.loos@hotmail.com", role = c("aut", "cre"),
@@ -18,6 +18,6 @@ Depends:
 LazyData: true
 Language: en-GB
 Config/Needs/website: rmarkdown
-Date: 2024-06-21
+Date: 2024-07-24
 URL: https://github.com/openwashdata/portawaterperu
 BugReports: https://github.com/openwashdata/portawaterperu/issues

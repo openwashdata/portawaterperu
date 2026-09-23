@@ -1,5 +1,5 @@
 
-url: https://github.com/openwashdata/portawaterperu
+url: https://openwashdata.github.io/portawaterperu/
 template:
   bootstrap: 5
   includes:

@@ -8,6 +8,7 @@
 [![License: CC BY
 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![R-CMD-check](https://github.com/openwashdata/portawaterperu/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/openwashdata/portawaterperu/actions/workflows/R-CMD-check.yaml)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13134309.svg)](https://zenodo.org/doi/10.5281/zenodo.13134309)
 <!-- badges: end -->
 
 The goal of the package `portawaterperu` is to provide access to data
@@ -40,8 +41,8 @@ library(kableExtra)
 Alternatively, you can download the individual datasets as a CSV or XLSX
 file from the table below.
 
-| dataset        | CSV                                                                                                     | XLSX                                                                                                      |
-|:---------------|:--------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------|
+| dataset | CSV | XLSX |
+|:---|:---|:---|
 | portawaterperu | [Download CSV](https://github.com/openwashdata/portawaterperu/raw/main/inst/extdata/portawaterperu.csv) | [Download XLSX](https://github.com/openwashdata/portawaterperu/raw/main/inst/extdata/portawaterperu.xlsx) |
 
 ## Data
@@ -64,7 +65,7 @@ portawaterperu |>
   gt::as_raw_html()
 ```
 
-<div id="rutvwqeijw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lyzrnnpzzi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   &#10;  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
     <tr class="gt_col_headings" style="border-style: none; border-top-style: solid; border-top-width: 2px; border-top-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3;">
@@ -276,8 +277,7 @@ portawaterperu |>
 <td headers="dist_connection" class="gt_row gt_right" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: right; font-variant-numeric: tabular-nums;" valign="middle" align="right">30</td>
 <td headers="dist_status" class="gt_row gt_center" style="border-style: none; padding-top: 8px; padding-bottom: 8px; padding-left: 5px; padding-right: 5px; margin: 10px; border-top-style: solid; border-top-width: 1px; border-top-color: #D3D3D3; border-left-style: none; border-left-width: 1px; border-left-color: #D3D3D3; border-right-style: none; border-right-width: 1px; border-right-color: #D3D3D3; vertical-align: middle; overflow-x: hidden; text-align: center;" valign="middle" align="center">A - BUENO</td></tr>
   </tbody>
-  &#10;  
-</table>
+  &#10;</table>
 </div>
 
 For an overview of the variable names, see the following table.
@@ -285,594 +285,1015 @@ For an overview of the variable names, see the following table.
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; ">
 
 <table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+
 <thead>
+
 <tr>
+
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+
 variable_name
 </th>
+
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+
 variable_type
 </th>
+
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+
 description
 </th>
+
 </tr>
+
 </thead>
+
 <tbody>
+
 <tr>
+
 <td style="text-align:left;">
+
 name
 </td>
+
 <td style="text-align:left;">
+
 character
 </td>
+
 <td style="text-align:left;">
+
 Name of the community water system
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 ID
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 ID of the water system
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 div
 </td>
+
 <td style="text-align:left;">
+
 character
 </td>
+
 <td style="text-align:left;">
+
 Geographical division of the community
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 lat
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Latitude of the community
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 long
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Longitude of the community
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 alt
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Altitude of the community
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 year
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Year of data collection about communities. (Use in caution)
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 community
 </td>
+
 <td style="text-align:left;">
+
 character
 </td>
+
 <td style="text-align:left;">
+
 Community name
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 service_provider
 </td>
+
 <td style="text-align:left;">
+
 character
 </td>
+
 <td style="text-align:left;">
+
 Service provider (PSE stands for Prestador de servicio)
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 pop_serviced
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Population served
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 hh_serviced
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Household served
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 type_gravity
 </td>
+
 <td style="text-align:left;">
+
 logical
 </td>
+
 <td style="text-align:left;">
+
 Is the community served by a gravity water supply system?
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 type_pump
 </td>
+
 <td style="text-align:left;">
+
 logical
 </td>
+
 <td style="text-align:left;">
+
 Is the community served by a pumped water supply system?
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 type_well
 </td>
+
 <td style="text-align:left;">
+
 logical
 </td>
+
 <td style="text-align:left;">
+
 Is the community served by a well/hand pump water supply system?
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 type_rain
 </td>
+
 <td style="text-align:left;">
+
 logical
 </td>
+
 <td style="text-align:left;">
+
 Is the community served by a rainwater harvesting water supply system?
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 water_dry_season
 </td>
+
 <td style="text-align:left;">
+
 logical
 </td>
+
 <td style="text-align:left;">
+
 Are there adequate water resources (at the source) to meet demand in dry
 season?
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 water_rain_season
 </td>
+
 <td style="text-align:left;">
+
 logical
 </td>
+
 <td style="text-align:left;">
+
 Are there adequate water resources (at the source) to meet demand in
 rainy season?
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 source_id
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 ID of the water source
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 source_type
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Type of the water source, options including (1) lake, (2) river, (3) dug
 well, and (4) drilled well.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 source_lat
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Latitude of the water source
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 source_long
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Longitude of the water source
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 source_alt
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Altitude of the water source
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 catch_macromeasure
 </td>
+
 <td style="text-align:left;">
+
 character
 </td>
+
 <td style="text-align:left;">
+
 Macro measurement of catchment
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 catch_status
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Status of the catchment, options including (1) A: good, (2) B: fair, (3)
 C: poor, and (4) D: Inoperable.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 maintenance_date
 </td>
+
 <td style="text-align:left;">
+
 c(“POSIXct”, “POSIXt”)
 </td>
+
 <td style="text-align:left;">
+
 Date of the maintainance data collection
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 catch_abcd
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Status of catchment at maintainance, options including (1) A: good, (2)
 B: fair, (3) C: poor, and (4) D: Inoperable.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 cond_abcd
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Status of condition at maintainance, options including (1) A: good, (2)
 B: fair, (3) C: poor, and (4) D: Inoperable.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 treat_type
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Type of treatment, options including (1) desinfection with chlorine and
 (2) slow filtration.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 treat_abcd
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Status of treatment at maintainance, options including (1) A: good, (2)
 B: fair, (3) C: poor, and (4) D: Inoperable.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 storage_abcd
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Status of the storage system at maintainance, options including (1) A:
 good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 dist_abcd
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Status of the distribution network at maintainance, options including
 (1) A: good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 flow
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Flow rate, check unit with column
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 flow_unit
 </td>
+
 <td style="text-align:left;">
+
 character
 </td>
+
 <td style="text-align:left;">
+
 Unit of flow rate
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 chlorine_res
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Chlorine residual
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 chlorine_res_unit
 </td>
+
 <td style="text-align:left;">
+
 character
 </td>
+
 <td style="text-align:left;">
+
 Unit of chlorine residual
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 treatment_ID
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 ID of the treatment
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 treatment_type
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Type of the treatment
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 treatment_function
 </td>
+
 <td style="text-align:left;">
+
 logical
 </td>
+
 <td style="text-align:left;">
+
 Is treatment functional?
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 treatment_lat
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Latitude of the water treatment
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 treatment_long
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Longitude of the water treatment
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 treatment_alt
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Altitude of the water treatment
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 storage_ID
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 ID of the water storage infrastructure.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 storage_clean_unit
 </td>
+
 <td style="text-align:left;">
+
 character
 </td>
+
 <td style="text-align:left;">
+
 Unit of cleaning frequency of the storage system
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 storage_lat
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Latitude of the water storage infrastructure.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 storage_long
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Longitude of the water storage infrastructure.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 storage_alt
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Altitude of the water storage infrastructure.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 storage_status
 </td>
+
 <td style="text-align:left;">
+
 factor
 </td>
+
 <td style="text-align:left;">
+
 Status of the water storage infrastructure, options including (1) A:
 good, (2) B: fair, (3) C: poor, and (4) D: Inoperable.
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 dist_ID
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 ID of the distribution system
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 dist_hour
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Hours of service per day
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 dist_connection
 </td>
+
 <td style="text-align:left;">
+
 numeric
 </td>
+
 <td style="text-align:left;">
+
 Number of distribution network connections
 </td>
+
 </tr>
+
 <tr>
+
 <td style="text-align:left;">
+
 dist_status
 </td>
+
 <td style="text-align:left;">
+
 character
 </td>
+
 <td style="text-align:left;">
+
 Status of the distribution system, options including (1) A: good, (2) B:
 fair, (3) C: poor, and (4) D: Inoperable.
 </td>
+
 </tr>
+
 </tbody>
+
 </table>
 
 </div>
@@ -894,7 +1315,7 @@ portawaterperu |>
   theme_classic()
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-7-1.png" alt="" width="100%" style="display: block; margin: auto;" />
 
 ## Capstone Project
 
@@ -938,17 +1359,22 @@ Please cite this package using:
 citation("portawaterperu")
 #> To cite package 'portawaterperu' in publications use:
 #> 
-#>   Judah L, Loos S, Zhong M (2024). _portawaterperu: A Preliminary
-#>   Review of Peruvian Potable Water System Data_. R package version
-#>   0.0.1, <https://github.com/openwashdata/portawaterperu>.
+#>   Judah L, Loos S, Zhong M (2024). "portawaterperu: A Preliminary
+#>   Review of Peruvian Potable Water System Data."
+#>   doi:10.5281/zenodo.13134309
+#>   <https://doi.org/10.5281/zenodo.13134309>.
+#>   <https://github.com/openwashdata/portawaterperu>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
-#>   @Manual{,
+#>   @Misc{judah_etall:2024,
 #>     title = {portawaterperu: A Preliminary Review of Peruvian Potable Water System Data},
 #>     author = {Lauren Judah and Sebastian Camilo Loos and Mian Zhong},
 #>     year = {2024},
-#>     note = {R package version 0.0.1},
+#>     doi = {10.5281/zenodo.13134309},
 #>     url = {https://github.com/openwashdata/portawaterperu},
+#>     abstract = {Data to gain preliminary understanding of community potable water systems in Peru.},
+#>     keywords = {open data,washdata,water supply,community water systems,drinking water,SIASAR,Peru},
+#>     version = {0.0.1},
 #>   }
 ```

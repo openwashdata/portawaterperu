@@ -21,3 +21,6 @@ Config/Needs/website: rmarkdown
 Date: 2024-07-24
 URL: https://github.com/openwashdata/portawaterperu
 BugReports: https://github.com/openwashdata/portawaterperu/issues
+X-schema.org-keywords: open data, washdata, water supply, community water systems, drinking water, SIASAR, Peru
+X-schema.org-spatialCoverage: Peru
+X-schema.org-temporalCoverage: 2015-06-02/2015-12-19

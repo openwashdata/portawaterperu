@@ -8,3 +8,4 @@
 ^pkgdown$
 ^CITATION\.cff$
 ^\.github$
+^\.zenodo\.json$

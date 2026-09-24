@@ -183,8 +183,8 @@ Please cite this package using:
 citation("portawaterperu")
 #> To cite package 'portawaterperu' in publications use:
 #> 
-#>   Judah L, Loos S, Zhong M (2024). "portawaterperu: A Preliminary
-#>   Review of Peruvian Potable Water System Data."
+#>   Judah L, Loos S, Zhong M, Schöbitz L (2024). "portawaterperu: A
+#>   Preliminary Review of Peruvian Potable Water System Data."
 #>   doi:10.5281/zenodo.13134309
 #>   <https://doi.org/10.5281/zenodo.13134309>.
 #>   <https://github.com/openwashdata/portawaterperu>.
@@ -193,7 +193,7 @@ citation("portawaterperu")
 #> 
 #>   @Misc{judah_etall:2024,
 #>     title = {portawaterperu: A Preliminary Review of Peruvian Potable Water System Data},
-#>     author = {Lauren Judah and Sebastian Camilo Loos and Mian Zhong},
+#>     author = {Lauren Judah and Sebastian Camilo Loos and Mian Zhong and Lars Schöbitz},
 #>     year = {2024},
 #>     doi = {10.5281/zenodo.13134309},
 #>     url = {https://github.com/openwashdata/portawaterperu},
